@@ -1,6 +1,7 @@
-package com.ubisam.examples.stomp.weather.stomp.ubisam;
+package com.ubisam.examples.stomp.weather.stomp.weather;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -15,23 +16,25 @@ import io.u2ware.common.stomp.client.config.WebsocketStompProperties;
 public class WeatherSubscriber implements WebsocketStompClientHandler{
 
     @Autowired
-    public WebsocketStompProperties properties;
+    private WebsocketStompProperties properties;
 
     @Autowired
-    public ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     @Override
     public void handleFrame(WebsocketStompClient client, JsonNode message) {
         System.out.println("message: " + message.toString());
 
-        ObjectNode data = mapper.createObjectNode();
-        data.put("message", "hello");
+        // ObjectNode data = mapper.createObjectNode();
+        // data.put("message", "hello");
 
-        client.send("/app/robot", data);
+        // client.send("/app/robot", data);
     }
 
     @Override
     public String getDestination() {
         return properties.getSubscriptions().get("weather");
     }
+
+
 }
