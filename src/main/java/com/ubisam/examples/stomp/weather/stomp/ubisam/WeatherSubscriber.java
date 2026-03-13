@@ -32,6 +32,6 @@ public class WeatherSubscriber implements WebsocketStompClientHandler{
 
     @Override
     public String getDestination() {
-        return properties.getSubscriptions().get("ubisam");
+        return properties.getSubscriptions().get("weather");
     }
 }
