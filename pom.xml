@@ -34,9 +34,27 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
+		<!--Rest-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.u2ware.common</groupId>
+			<artifactId>u2ware-common-data</artifactId>
+			<version>3.5.11</version>
+		</dependency>
+
+		<!-- WebSocket -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.u2ware.common</groupId>
+			<artifactId>u2ware-common-stomp</artifactId>
+			<version>3.5.11</version>
 		</dependency>
 
 		<dependency>
@@ -44,16 +62,31 @@
 			<artifactId>hsqldb</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.restdocs</groupId>
+			<artifactId>spring-restdocs-mockmvc</artifactId>
+			<scope>test</scope>
+		</dependency>
+    <dependency>
+			<groupId>io.u2ware.common</groupId>
+			<artifactId>u2ware-common-docs</artifactId>
+			<version>3.5.11</version>
+			<scope>test</scope>
+    </dependency>
+
 	</dependencies>
 
 	<build>
