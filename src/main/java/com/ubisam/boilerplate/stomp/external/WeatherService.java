@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 @Service
 public class WeatherService {
+  
     @Autowired
     private WeatherApi weatherApi;
 
