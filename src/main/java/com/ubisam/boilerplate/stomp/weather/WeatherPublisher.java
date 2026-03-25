@@ -9,10 +9,15 @@ import com.ubisam.boilerplate.stomp.external.WeatherStore;
 import com.ubisam.boilerplate.stomp.external.WeatherConfigProperties;
 import com.ubisam.boilerplate.stomp.external.WeatherCronProperties;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import io.u2ware.common.stomp.client.WebsocketStompClient;
 
 @Component
 public class WeatherPublisher extends WeatherCronProperties{
+
+  protected Log logger = LogFactory.getLog(getClass());
 
   @Autowired
   private WebsocketStompClient websocketStompClient;
@@ -23,6 +28,7 @@ public class WeatherPublisher extends WeatherCronProperties{
   @Scheduled(cron = SEND_WEATHER)
   public void sendWeatherData(){
     JsonNode data = WeatherStore.get(config.getStoreKey());
+    logger.info("[sendWeatherData]: "+ data);
     websocketStompClient.send("/app/" + config.getDestination(), data);
   }
   

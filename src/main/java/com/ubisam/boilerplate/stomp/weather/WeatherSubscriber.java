@@ -9,12 +9,17 @@ import io.u2ware.common.stomp.client.WebsocketStompClient;
 import io.u2ware.common.stomp.client.WebsocketStompClientHandler;
 import io.u2ware.common.stomp.client.config.WebsocketStompProperties;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.ubisam.boilerplate.stomp.external.WeatherKeywordMatcher;
 import com.ubisam.boilerplate.stomp.external.WeatherConfigProperties;
 import com.ubisam.boilerplate.stomp.external.WeatherStore;
 
 @Component
 public class WeatherSubscriber implements WebsocketStompClientHandler {
+
+    protected Log logger = LogFactory.getLog(getClass());
 
     @Autowired
     private WeatherKeywordMatcher keywordMatcher;
@@ -30,6 +35,7 @@ public class WeatherSubscriber implements WebsocketStompClientHandler {
         JsonNode payload = message.get("payload");
         if (keywordMatcher.containsKeyword(payload, config.getTriggerKeyword())) {
             JsonNode data = WeatherStore.get(config.getStoreKey());
+            logger.info("[handleFrame]: "+ data);
             client.send("/app/" + config.getDestination(), data);
         }
     }
