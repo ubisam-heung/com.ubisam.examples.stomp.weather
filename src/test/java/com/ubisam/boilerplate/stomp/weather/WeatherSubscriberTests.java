@@ -10,30 +10,29 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.lang.reflect.Field;
 import org.mockito.Mockito;
 
 class WeatherSubscriberTests {
     @Test
     void handleFrame_keywordMatched_sendsData() throws Exception {
-        WeatherKeywordMatcher keywordMatcher = Mockito.mock(WeatherKeywordMatcher.class);
-        WebsocketStompProperties properties = Mockito.mock(WebsocketStompProperties.class);
-        WeatherConfigProperties config = Mockito.mock(WeatherConfigProperties.class);
-        WebsocketStompClient client = Mockito.mock(WebsocketStompClient.class);
-        JsonNode payload = Mockito.mock(JsonNode.class);
-        JsonNode message = Mockito.mock(JsonNode.class);
+        var keywordMatcher = Mockito.mock(WeatherKeywordMatcher.class);
+        var properties = Mockito.mock(WebsocketStompProperties.class);
+        var config = Mockito.mock(WeatherConfigProperties.class);
+        var client = Mockito.mock(WebsocketStompClient.class);
+        var payload = Mockito.mock(JsonNode.class);
+        var message = Mockito.mock(JsonNode.class);
         Mockito.when(message.get("payload")).thenReturn(payload);
         Mockito.when(keywordMatcher.containsKeyword(payload, "trigger")).thenReturn(true);
         Mockito.when(config.getTriggerKeyword()).thenReturn("trigger");
         Mockito.when(config.getStoreKey()).thenReturn("key");
         Mockito.when(config.getDestination()).thenReturn("dest");
-        JsonNode data = Mockito.mock(JsonNode.class);
+        var data = Mockito.mock(JsonNode.class);
         try (var store = Mockito.mockStatic(WeatherStore.class)) {
             store.when(() -> WeatherStore.get("key")).thenReturn(data);
-            WeatherSubscriber subscriber = new WeatherSubscriber();
-            Field f1 = subscriber.getClass().getDeclaredField("keywordMatcher");
-            Field f2 = subscriber.getClass().getDeclaredField("properties");
-            Field f3 = subscriber.getClass().getDeclaredField("config");
+            var subscriber = new WeatherSubscriber();
+            java.lang.reflect.Field f1 = subscriber.getClass().getDeclaredField("keywordMatcher");
+            java.lang.reflect.Field f2 = subscriber.getClass().getDeclaredField("properties");
+            java.lang.reflect.Field f3 = subscriber.getClass().getDeclaredField("config");
             f1.setAccessible(true); f2.setAccessible(true); f3.setAccessible(true);
             f1.set(subscriber, keywordMatcher);
             f2.set(subscriber, properties);
@@ -45,17 +44,17 @@ class WeatherSubscriberTests {
 
     @Test
     void handleFrame_keywordNotMatched_doesNotSend() throws Exception {
-        WeatherKeywordMatcher keywordMatcher = Mockito.mock(WeatherKeywordMatcher.class);
-        WeatherConfigProperties config = Mockito.mock(WeatherConfigProperties.class);
-        WebsocketStompClient client = Mockito.mock(WebsocketStompClient.class);
-        JsonNode message = Mockito.mock(JsonNode.class);
-        JsonNode payload = Mockito.mock(JsonNode.class);
+        var keywordMatcher = Mockito.mock(WeatherKeywordMatcher.class);
+        var config = Mockito.mock(WeatherConfigProperties.class);
+        var client = Mockito.mock(WebsocketStompClient.class);
+        var message = Mockito.mock(JsonNode.class);
+        var payload = Mockito.mock(JsonNode.class);
         Mockito.when(message.get("payload")).thenReturn(payload);
         Mockito.when(keywordMatcher.containsKeyword(payload, "trigger")).thenReturn(false);
         Mockito.when(config.getTriggerKeyword()).thenReturn("trigger");
-        WeatherSubscriber subscriber = new WeatherSubscriber();
-        Field f1 = subscriber.getClass().getDeclaredField("keywordMatcher");
-        Field f3 = subscriber.getClass().getDeclaredField("config");
+        var subscriber = new WeatherSubscriber();
+        java.lang.reflect.Field f1 = subscriber.getClass().getDeclaredField("keywordMatcher");
+        java.lang.reflect.Field f3 = subscriber.getClass().getDeclaredField("config");
         f1.setAccessible(true); f3.setAccessible(true);
         f1.set(subscriber, keywordMatcher);
         f3.set(subscriber, config);
