@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Component
 @Data
-public class WeatherConfig {
+public class WeatherConfigProperties {
   protected String storeKey = "weather";
   protected String triggerKeyword = "action";
   protected String destination = "weather";

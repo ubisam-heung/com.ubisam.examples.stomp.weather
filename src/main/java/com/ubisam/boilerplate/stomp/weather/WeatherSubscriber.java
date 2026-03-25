@@ -10,7 +10,7 @@ import io.u2ware.common.stomp.client.WebsocketStompClientHandler;
 import io.u2ware.common.stomp.client.config.WebsocketStompProperties;
 
 import com.ubisam.boilerplate.stomp.external.WeatherKeywordMatcher;
-import com.ubisam.boilerplate.stomp.external.WeatherConfig;
+import com.ubisam.boilerplate.stomp.external.WeatherConfigProperties;
 import com.ubisam.boilerplate.stomp.external.WeatherStore;
 
 @Component
@@ -23,7 +23,7 @@ public class WeatherSubscriber implements WebsocketStompClientHandler {
     private WebsocketStompProperties properties;
 
     @Autowired
-    private WeatherConfig config;
+    private WeatherConfigProperties config;
 
     @Override
     public void handleFrame(WebsocketStompClient client, JsonNode message) {

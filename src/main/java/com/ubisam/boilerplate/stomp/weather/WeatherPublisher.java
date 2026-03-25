@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.ubisam.boilerplate.stomp.external.WeatherStore;
-import com.ubisam.boilerplate.stomp.external.WeatherConfig;
+import com.ubisam.boilerplate.stomp.external.WeatherConfigProperties;
 import com.ubisam.boilerplate.stomp.external.WeatherCronProperties;
 
 import io.u2ware.common.stomp.client.WebsocketStompClient;
@@ -18,12 +18,12 @@ public class WeatherPublisher extends WeatherCronProperties{
   private WebsocketStompClient websocketStompClient;
 
   @Autowired
-  private WeatherConfig config;
+  private WeatherConfigProperties config;
 
-  // @Scheduled(cron = SEND_WEATHER)
-  // public void sendWeatherData(){
-  //   JsonNode data = WeatherStore.get(config.getStoreKey());
-  //   websocketStompClient.send("/app/" + config.getDestination(), data);
-  // }
+  @Scheduled(cron = SEND_WEATHER)
+  public void sendWeatherData(){
+    JsonNode data = WeatherStore.get(config.getStoreKey());
+    websocketStompClient.send("/app/" + config.getDestination(), data);
+  }
   
 }
