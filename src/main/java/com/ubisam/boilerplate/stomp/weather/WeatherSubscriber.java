@@ -35,7 +35,7 @@ public class WeatherSubscriber implements WebsocketStompClientHandler {
         JsonNode payload = message.get("payload");
         if (keywordMatcher.containsKeyword(payload, config.getTriggerKeyword())) {
             JsonNode data = WeatherStore.get(config.getStoreKey());
-            logger.info("[handleFrame]: "+ data);
+            logger.debug("[handleFrame]: "+ data);
             client.send("/app/" + config.getDestination(), data);
         }
     }

@@ -28,7 +28,7 @@ public class WeatherPublisher extends WeatherCronProperties{
   @Scheduled(cron = SEND_WEATHER)
   public void sendWeatherData(){
     JsonNode data = WeatherStore.get(config.getStoreKey());
-    logger.info("[sendWeatherData]: "+ data);
+    logger.debug("[sendWeatherData]: "+ data);
     websocketStompClient.send("/app/" + config.getDestination(), data);
   }
   

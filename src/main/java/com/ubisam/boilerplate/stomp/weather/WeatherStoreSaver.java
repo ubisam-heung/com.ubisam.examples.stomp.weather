@@ -38,7 +38,7 @@ public class WeatherStoreSaver extends WeatherCronProperties{
 
   void fetchAndStoreWeather() {
     var data = weatherApi.getWeather();
-    logger.info("[fetchAndStoreWeather]: "+ data);
+    logger.debug("[fetchAndStoreWeather]: "+ data);
     WeatherStore.put(config.getStoreKey(), data);
   }
 

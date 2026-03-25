@@ -13,7 +13,7 @@ public class WeatherKeywordMatcher {
     protected Log logger = LogFactory.getLog(getClass());
     
     public boolean containsKeyword(JsonNode node, String keyword) {
-        logger.info("[containsKeyword]: "+ keyword);
+        logger.debug("[containsKeyword]: "+ keyword);
         if (node == null) return false;
         if (node.isTextual() || node.isNumber()) {
             return node.asText().contains(keyword);

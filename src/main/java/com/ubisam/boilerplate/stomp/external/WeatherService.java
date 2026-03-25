@@ -16,7 +16,7 @@ public class WeatherService {
 
     public JsonNode getAndStoreWeather(String key) {
         JsonNode weather = weatherApi.getWeather();
-        logger.info("[getAndStoreWeather]: "+ weather);
+        logger.debug("[getAndStoreWeather]: "+ weather);
         WeatherStore.put(key, weather);
         return weather;
     }
