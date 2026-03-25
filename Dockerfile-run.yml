@@ -1,0 +1,84 @@
+
+name: ubisam-weather-stomp 
+
+services:
+
+  ####################################################################
+  # weather-stomp-mq
+  ####################################################################
+  weather-stomp-mq:
+    image: ghcr.io/ubisam-research/com.ubisam.rabbitmq:3-management
+
+    container_name: weather-stomp-mq
+
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "61613:61613"
+
+    environment:
+      RABBITMQ_DEFAULT_USER: stomp-mq
+      RABBITMQ_DEFAULT_PASS: stomp-mq
+
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 1
+
+
+  ####################################################################
+  # weather-stomp-server
+  ####################################################################
+  weather-stomp-web:
+    image: ghcr.io/u2waremanager/io.u2ware.product.stomp-server:3.5.11
+
+    container_name: weather-stomp-web
+
+    # volumes:
+    #   - <....>:/var/lib/u2ware/logs
+
+    ports:
+      - "9030:8080"
+
+    environment:
+      io.u2ware.common.stomp.publishing: /topic/sessions
+      
+      io.u2ware.common.stomp.broker.host: weather-stomp-mq
+      io.u2ware.common.stomp.broker.port: 61613
+      io.u2ware.common.stomp.broker.username: stomp-mq
+      io.u2ware.common.stomp.broker.password: stomp-mq
+
+    depends_on:
+      weather-stomp-mq:
+        condition: service_healthy
+
+    healthcheck:
+      test: ["CMD", "ls", "-al"]
+      interval: 60s 
+      timeout: 3s 
+      retries: 1 
+      start_period: 3s
+
+  ####################################################################
+  # boilerplate-backend
+  ####################################################################
+  boilerplate-backend:
+    image: boilerplate/backend:0.0.1-SNAPSHOT
+
+    container_name: boilerplate-backend
+
+    # volumes:
+    #   - <....>:/var/lib/boilerplate/logs
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      io.u2ware.common.stomp.url: ws://weather-stomp-web:8080/stomp
+      io.u2ware.common.stomp.subscriptions.weather: /topic/weather
+      weather.api.fixed.url: https://api.openweathermap.org/data/2.5/weather?q=Seoul&lang=kr&units=metric&appid=433ba902b7082d331c980a4f551daaa6
+
+    depends_on:
+      weather-stomp-web:
+        condition: service_healthy

@@ -64,19 +64,45 @@ weather.api.fixed.url=...
 
 ---
 
+
 ## 💻 실행 방법
 
-1. **의존성 설치 및 빌드**
-	 ```bash
-	 ./mvnw clean package
-	 ```
+### 🛠️ 개발환경 (로컬 개발)
 
-2. **애플리케이션 실행**
-	 ```bash
-	 ./mvnw spring-boot:run
-	 ```
+1. **Docker Compose로 개발환경 컨테이너 실행**
+	```bash
+	docker compose -f Dockerfile-dev.yml up -d
+	```
 
-3. **STOMP 서버와 연동 및 날씨 데이터 수집/발행 자동화**
+2. **Spring Boot 애플리케이션 실행**
+	```bash
+	./mvnw spring-boot:run
+	```
+
+3. **접속**
+	- http://localhost:9030
+
+---
+
+### 🚀 빌드/운영환경 (배포용)
+
+1. **패키징**
+	```bash
+	./mvnw package
+	```
+
+2. **멀티플랫폼 Docker 이미지 빌드**
+	```bash
+	docker build --platform linux/arm64,linux/amd64 -t boilerplate/backend:0.0.1-SNAPSHOT .
+	```
+
+3. **Docker Compose로 운영환경 컨테이너 실행**
+	```bash
+	docker compose -f Dockerfile-run.yml up -d
+	```
+
+4. **접속**
+	- http://localhost:9030
 
 ---
 
