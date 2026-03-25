@@ -106,6 +106,7 @@ weather.api.fixed.url=...
 
 ---
 
+
 ## 🧩 주요 클래스 및 역할
 
 - **Application** : Spring Boot 실행 진입점
@@ -113,6 +114,25 @@ weather.api.fixed.url=...
 - **WeatherService** : 날씨 데이터 수집 및 WeatherStore 저장
 - **WeatherStore** : 메모리 기반 데이터 저장/조회/초기화
 - **WeatherConfigProperties** : 발행/트리거 관련 설정값 관리
+
+---
+
+## ⚡ 커스터마이즈 안내
+
+`WeatherConfigProperties` 클래스의 storeKey, triggerKeyword, destination 값은 원하는 값으로 자유롭게 변경할 수 있습니다.
+예시)
+
+```java
+@Component
+@Data
+public class WeatherConfigProperties {
+	protected String storeKey = "weather";           // 저장소 키 (원하는 값으로 변경 가능)
+	protected String triggerKeyword = "action";      // 트리거 키워드 (원하는 값으로 변경 가능)
+	protected String destination = "weather";        // 발행 대상 (원하는 값으로 변경 가능)
+}
+```
+
+이 값들을 프로젝트 목적에 맞게 수정하여 사용할 수 있습니다.
 - **WeatherSubscriber** : STOMP 메시지 수신 후 키워드 감지 및 데이터 발행
 - **WeatherPublisher** : 주기적 데이터 발행 (스케줄 기반)
 - **WeatherStoreSaver** : 날씨 데이터 저장 트리거
