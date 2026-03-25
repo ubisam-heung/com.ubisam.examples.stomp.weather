@@ -5,6 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.ubisam.boilerplate.stomp.external.WeatherApi;
+import com.ubisam.boilerplate.stomp.external.WeatherConfig;
 import com.ubisam.boilerplate.stomp.external.WeatherStore;
 
 import jakarta.annotation.PostConstruct;
@@ -16,6 +17,9 @@ public class WeatherStoreSaver extends WeatherCronProperties{
 
   @Autowired
   private WeatherApi weatherApi;
+
+  @Autowired
+  private WeatherConfig config;
 
   @Scheduled(cron = GET_WEATHER)
   public void getWeatherData(){
@@ -29,7 +33,7 @@ public class WeatherStoreSaver extends WeatherCronProperties{
 
   private void fetchAndStoreWeather() {
     var data = weatherApi.getWeather();
-    WeatherStore.put("weather", data);
+    WeatherStore.put(config.getStoreKey(), data);
   }
 
 }
