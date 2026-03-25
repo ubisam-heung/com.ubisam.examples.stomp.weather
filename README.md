@@ -126,3 +126,4 @@ if (keywordMatcher.containsKeyword(payload, config.getTriggerKeyword())) {
 - WeatherPublisher의 주기적 발행 기능은 스케줄 설정에 따라 동작합니다.
 
 ---
+
