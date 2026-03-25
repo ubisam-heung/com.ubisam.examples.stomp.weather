@@ -1,4 +1,4 @@
-# Ubisam STOMP Weather2 (Java/Spring Boot)
+# Ubisam STOMP Weather (Java/Spring Boot)
 
 ---
 
