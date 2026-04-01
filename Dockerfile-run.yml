@@ -77,6 +77,7 @@ services:
     environment:
       io.u2ware.common.stomp.url: ws://weather-stomp-web:8080/stomp
       io.u2ware.common.stomp.subscriptions.weather: /topic/weather
+      io.u2ware.common.stomp.subscriptions.sessions: /topic/sessions
       weather.api.fixed.url: https://api.openweathermap.org/data/2.5/weather?q=Seoul&lang=kr&units=metric&appid=433ba902b7082d331c980a4f551daaa6
 
     depends_on:
