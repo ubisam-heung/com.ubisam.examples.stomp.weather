@@ -1,4 +1,4 @@
-package com.ubisam.boilerplate.stomp.external;
+package com.ubisam.boilerplate.stomp.util;
 
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.JsonNode;

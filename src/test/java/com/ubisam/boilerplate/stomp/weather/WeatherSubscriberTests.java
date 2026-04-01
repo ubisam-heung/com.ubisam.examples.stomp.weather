@@ -2,8 +2,9 @@ package com.ubisam.boilerplate.stomp.weather;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.ubisam.boilerplate.stomp.external.WeatherConfigProperties;
-import com.ubisam.boilerplate.stomp.external.WeatherKeywordMatcher;
 import com.ubisam.boilerplate.stomp.external.WeatherStore;
+import com.ubisam.boilerplate.stomp.util.WeatherKeywordMatcher;
+
 import io.u2ware.common.stomp.client.WebsocketStompClient;
 import io.u2ware.common.stomp.client.config.WebsocketStompProperties;
 import org.junit.jupiter.api.Test;

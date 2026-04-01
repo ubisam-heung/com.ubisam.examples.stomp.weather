@@ -1,6 +1,7 @@
-package com.ubisam.boilerplate.stomp.external;
+package com.ubisam.boilerplate.stomp.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.ubisam.boilerplate.stomp.util.WeatherKeywordMatcher;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

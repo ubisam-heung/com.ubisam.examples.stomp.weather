@@ -12,9 +12,9 @@ import io.u2ware.common.stomp.client.config.WebsocketStompProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.ubisam.boilerplate.stomp.external.WeatherKeywordMatcher;
 import com.ubisam.boilerplate.stomp.external.WeatherConfigProperties;
 import com.ubisam.boilerplate.stomp.external.WeatherStore;
+import com.ubisam.boilerplate.stomp.util.WeatherKeywordMatcher;
 
 @Component
 public class WeatherSubscriber implements WebsocketStompClientHandler {
