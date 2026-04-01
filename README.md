@@ -30,9 +30,10 @@ src/
 					WeatherApi.java              # 외부 날씨 API 연동 (FeignClient)
 					WeatherConfigProperties.java # 날씨 관련 설정값 관리
 					WeatherCronProperties.java   # 스케줄/크론 설정
-					WeatherKeywordMatcher.java   # 키워드 감지 유틸
 					WeatherService.java          # 날씨 데이터 수집 및 저장 서비스
 					WeatherStore.java            # 메모리 기반 날씨 데이터 저장소
+				util/
+					WeatherKeywordMatcher.java   # 키워드 감지 유틸
 				weather/
 					WeatherPublisher.java        # 주기적 데이터 발행 컴포넌트
 					WeatherStoreSaver.java       # 날씨 데이터 저장 트리거
@@ -42,7 +43,8 @@ src/
 	test/
 		java/com/ubisam/boilerplate/
 			ApplicationTests.java
-			stomp/external/                  # 외부 연동/유틸 단위 테스트
+			stomp/external/                  # 외부 연동 단위 테스트
+			stomp/util/                  		 # 외부 유틸 단위 테스트
 			stomp/weather/                   # 퍼블리셔/서브스크라이버 테스트
 ```
 
