@@ -95,7 +95,7 @@ weather.api.fixed.url=...
 
 2. **멀티플랫폼 Docker 이미지 빌드**
 	```bash
-	docker build --platform linux/arm64,linux/amd64 -t boilerplate/backend:0.0.1-SNAPSHOT .
+	docker build --platform linux/arm64,linux/amd64 -t weather-boilerplate/backend:0.0.1-SNAPSHOT .
 	```
 
 3. **Docker Compose로 운영환경 컨테이너 실행**
